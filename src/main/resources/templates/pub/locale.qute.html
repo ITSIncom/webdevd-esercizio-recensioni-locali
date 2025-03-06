@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Locale</title>
+    <style>
+      img {
+        width: 500px;
+        height: auto;
+      }
+
+      #localeContainer {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        width: 80%;
+        height: 400px;
+      }
+    </style>
+</head>
+<body>
+  <h1>Recensioni per locale</h1>
+  <div id="localeContainer">
+    <h2>Nome del locale</h2>
+    <p>Indirizzo del locale</p>
+    <p>Voto medio degli utenti: <b>Voto</b></p>
+    <img src="https://img1.10bestmedia.com/Images/Photos/341049/pizzeria-popolare-05_54_990x660.jpg">
+  </div>
+
+  <a id="link" href="aggiuntaRecensione.qute.html">Aggiungi recensione</a>
+
+  <form action="locale.qute.html" method="post">
+    <label for="filtro">
+      Mostra con voto massimo:
+      <select name="filtro" id="filtro">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button type="submit">Applica filtro</button>
+    </label>
+  </form>
+
+  <div>
+    <p>Autore - Data</p>
+    <h3>Titolo</h3>
+    <p>Voto</p>
+    <p>Testo</p>
+  </div>
+</body>
+</html>
