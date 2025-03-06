@@ -2,17 +2,27 @@ package it.itsincom.webdevd.web;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
+import it.itsincom.webdevd.service.UtentiManager;
+import it.itsincom.webdevd.web.validation.CredentialValidator;
+import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
+
+import java.net.URI;
 
 @Path("/login")
 public class LoginResource {
 
     private final Template login;
+    private final UtentiManager utentiManager;
+    private final CredentialValidator credentialValidator;
 
-    public LoginResource(Template login) {
+    public LoginResource(Template login, UtentiManager utentiManager, CredentialValidator credentialValidator) {
         this.login = login;
+        this.utentiManager = utentiManager;
+        this.credentialValidator = credentialValidator;
     }
 
     @GET
@@ -21,6 +31,30 @@ public class LoginResource {
     }
 
     @POST
-    public void processaLogin() {
+    public Response processaLogin(
+            @FormParam("username") String username,
+            @FormParam("password") String password
+    ) {
+        String messaggioErrore = null;
+        if (credentialValidator.validatePassword(password) != null) {
+            messaggioErrore = "Username o password non validi";
+        } else if (credentialValidator.validateUsername(username) != null) {
+            messaggioErrore = "Username o password non validi";
+        }
+
+        if (messaggioErrore != null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(login.data("message", messaggioErrore))
+                    .build();
+        }
+
+        if (!utentiManager.checkPassword(username, password)) {
+            messaggioErrore = "Username o password non validi";
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(login.data("message", messaggioErrore))
+                    .build();
+        }
+
+        return Response.seeOther(URI.create("/")).build();
     }
 }
