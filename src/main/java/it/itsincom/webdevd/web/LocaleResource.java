@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 
 
 @Path("/locale")
@@ -29,9 +30,9 @@ public class LocaleResource {
     @POST
     public Response processLocale(@FormParam("nome") String nomeLocale
                                 ,@FormParam("indirizzo") String indirizzoLocale)  {
-        try(FileWriter fw = new FileWriter("locale.txt")) {
+        try(FileWriter fw = new FileWriter("locale.csv",true)) {
             fw.write(nomeLocale + "," + indirizzoLocale);
-            return Response.ok().build();
+            return Response.seeOther(URI.create("/")).build();
         }
         catch (IOException e) {
             return Response.serverError().build();
