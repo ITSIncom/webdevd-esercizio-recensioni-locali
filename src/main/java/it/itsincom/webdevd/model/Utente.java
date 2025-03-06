@@ -18,7 +18,7 @@ public class Utente {
     }
 
 
-    public String getEmail() {
+    public String getUsername() {
         return username;
     }
 
