@@ -12,6 +12,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.NewCookie;
 import jakarta.ws.rs.core.Response;
 
+import java.io.IOException;
 import java.net.URI;
 
 @Path("/login")
@@ -38,7 +39,7 @@ public class LoginResource {
     public Response processaLogin(
             @FormParam("username") String username,
             @FormParam("password") String password
-    ) {
+    ) throws IOException {
         String messaggioErrore = null;
         if (credentialValidator.validatePassword(password) != null) {
             messaggioErrore = "Username o password non validi";
