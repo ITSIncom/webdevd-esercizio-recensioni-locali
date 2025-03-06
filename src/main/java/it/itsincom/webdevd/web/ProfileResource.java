@@ -18,12 +18,12 @@ public class ProfileResource {
     }
 
     @GET
-    public TemplateInstance drawProfile(@QueryParam("username") String username) {
-        return profile.instance().data("username", username);
+    public TemplateInstance drawProfile() {
+        return profile.instance();
     }
 
     @POST
     public Response processProfile(@QueryParam("username") String username) {
-        return Response.ok(profile.data(username).render()).build();
+        return Response.ok(profile.data("username",username).render()).build();
     }
 }
