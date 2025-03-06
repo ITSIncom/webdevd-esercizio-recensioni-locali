@@ -52,17 +52,20 @@ public class LoginResource {
                     .build();
         }
 
-        if (!utentiManager.checkPassword(username, password)) {
+        if (utentiManager.isUserRegistered(username, password))
+        {
+            NewCookie sessionCookie = sessionManager.createUserSession(username);
+            return Response
+                    .seeOther(URI.create("/"))
+                    .cookie(sessionCookie)
+                    .build();
+        }
+        else
+        {
             messaggioErrore = "Username o password non validi";
             return Response.status(Response.Status.UNAUTHORIZED)
                     .entity(login.data("message", messaggioErrore))
                     .build();
         }
-
-        NewCookie sessionCookie = sessionManager.createUserSession(username);
-        return Response
-                .seeOther(URI.create("/"))
-                .cookie(sessionCookie)
-                .build();
     }
 }
