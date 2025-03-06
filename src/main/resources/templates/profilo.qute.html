@@ -5,8 +5,10 @@
     <title>Profilo</title>
 </head>
 <body>
-<p>Username : { profilo.user}</p>
-<li><a href="/logout">Esci</a></li>
+<p>Username : {user}</p>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
 
 
 </body>

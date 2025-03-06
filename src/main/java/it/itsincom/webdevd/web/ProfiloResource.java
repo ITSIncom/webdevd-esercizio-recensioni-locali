@@ -23,7 +23,7 @@ public class ProfiloResource {
 
         @GET
         @Produces(MediaType.TEXT_HTML)
-        public Response mostraProfilo(@CookieParam("sessionId") String sessionId) {
+        public Response mostraProfilo(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId) {
                 if (sessionManager.getUserFromSession(sessionId) == null) {
                         return Response.status(Response.Status.UNAUTHORIZED).entity("Sessione non valida").build();
                 }

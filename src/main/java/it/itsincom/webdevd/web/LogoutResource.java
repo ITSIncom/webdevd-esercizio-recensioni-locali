@@ -6,6 +6,8 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.Response;
 
+import java.net.URI;
+
 @Path("/logout")
 public class LogoutResource {
 
@@ -13,13 +15,11 @@ public class LogoutResource {
     SessionManager sessionManager;
 
     @POST
-    public Response logout(@CookieParam("sessionId") String sessionId) {
-        if (sessionId == null || sessionManager.getUserFromSession(sessionId) == null) {
+    public Response logout(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId) {
+        if (sessionManager.getUserFromSession(sessionId) == null) {
             return Response.status(Response.Status.UNAUTHORIZED).entity("Sessione non valida").build();
         }
         sessionManager.removeUserFromSession(sessionId);
-        return Response.ok("Logout effettuato")
-                .cookie(new jakarta.ws.rs.core.NewCookie("sessionId", "", "/", null, null, 0, false))
-                .build();
+        return Response.seeOther(URI.create("/")).build();
     }
 }
