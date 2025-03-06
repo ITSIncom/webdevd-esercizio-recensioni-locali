@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aggiungi un locale</title>
+</head>
+<div class="header">Local Searchers</div>
+<body>
+
+<form action="/locale" method="post">
+  <label for="nome">Nome del Ristorante:</label>
+  <input type="text" id="nome" name="nome" required><br>
+
+  <label for="indirizzo">Indirizzo:</label>
+  <input type="text" id="indirizzo" name="indirizzo" required><br>
+
+  <label for="foto">Foto:</label>
+  <input type="file" id="foto" name="foto" accept="image/*"><br>
+
+  <button type="submit">Salva</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Aggiunta Recensione</title>
+</head>
+<body>
+<div class="header">Local Searchers</div>
+<h3>Inserisci una recensione per <i>{locale}</i></h3>
+<form>
+    <label for="titolo">Titolo:</label>
+    <input type="text" id="titolo" name="titolo" required><br>
+
+    <label for="voto">Voto:</label>
+    <div class="stars" id="star-rating">
+        <span class="star" data-value="1">★</span>
+        <span class="star" data-value="2">★</span>
+        <span class="star" data-value="3">★</span>
+        <span class="star" data-value="4">★</span>
+        <span class="star" data-value="5">★</span>
+    </div>
+    <input type="hidden" id="voto" name="voto" value="0">
+
+    <label for="recensione">Recensione:</label>
+    <textarea id="recensione" name="recensione" rows="4" required></textarea>
+
+    <button type="submit">Salva</button>
+</form>
+</body>
+</html>

@@ -11,6 +11,8 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.IOException;
 import java.net.URI;
 
@@ -55,15 +57,12 @@ public class RegistrazioneResource {
                     .build();
         }
 
-        boolean aggiunto = utentiManager.add(username, password);
-        if (!aggiunto) {
-            messaggioErrore = "Utente già esistente";
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(registrazione.data("message", messaggioErrore))
-                    .build();
-
+        try(FileWriter fw = new FileWriter("credential.csv",true)) {
+            fw.write(username + ";" + password);
+            return Response.seeOther(URI.create("/login")).build();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        return Response.seeOther(URI.create("/login")).build();
 
     }
 }

@@ -4,20 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #ecedef;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 1rem;
+            gap: 4rem;
+
+            & .title {
+                color: darkseagreen;
+                font-size: 2rem;
+                font-weight: 800;
+            }
+        }
+
+        .searchbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            margin-top: 8rem;
+
+            & input {
+                padding: 1rem;
+                width: 30vw;
+                border: none;
+                border-radius: 1rem;
+                outline: none;
+                font-family: "Montserrat", sans-serif;
+                font-size: 1rem;
+                font-weight: 500;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            font-size: 1rem;
+
+            & a {
+                text-decoration: none;
+                color: #ffffff;
+
+                & button {
+                    width: 150px;
+                    padding: 1rem;
+                    border: none;
+                    border-radius: 1rem;
+                    background: darkseagreen;
+                    transition: 0.3s all;
+                    cursor: pointer;
+                    color: #ffffff;
+
+                    &:hover {
+                        background: #4c7a4c;
+                    }
+                }
+            }
+        }
+
+
+
+        .search {
+            width: 150px;
+            padding: 1rem;
+            border: none;
+            border-radius: 1rem;
+            background: darkseagreen;
+            transition: 0.3s all;
+            cursor: pointer;
+            color: #ffffff;
+
+            &:hover {
+                background: #4c7a4c;
+            }
+        }
+    </style>
 </head>
 <body>
-<h1>Home Page</h1>
-<ul>
-    <li><a href="/login">Accedi</a></li>
-    {#if loggedIn }
-        <li><a href="/profilo">Profilo</a></li>
-    {#else}
-        <li><a href="/registrazione">Registrati</a></li>
-    {/if}
-</ul>
-<form action="/ricerca" method="post">
-    <label for="search"><input id="search" placeholder="Cerca un locale..." name="search"></label>
-    <button type="submit">Cerca</button>
-</form>
+    <nav>
+        <h1 class="title">Local Searcher</h1>
+        <div class="buttons">
+            <a href="/login"><button>Accedi</button></a>
+
+            {#if loggedIn }
+                <a href="/profile"><button>Profilo</button></a>
+            {#else}
+                <a href="/registrazione"><button>Registrati</button></a>
+            {/if}
+        </div>
+    </nav>
+
+    <div class="searchbar">
+        <form action="/ricerca" method="post">
+            <label for="search">
+                <input id="search" placeholder="Cerca un locale..." name="search">
+            </label>
+            <button type="submit" class="search">Cerca</button>
+        </form>
+    </div>
+
+
 </body>
 </html>
