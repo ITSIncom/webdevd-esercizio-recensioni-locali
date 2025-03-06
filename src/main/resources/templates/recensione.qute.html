@@ -8,7 +8,7 @@
 <body>
 <div class="header">Local Searchers</div>
 <h3>Inserisci una recensione per <i>{locale}</i></h3>
-<form action="salvaRecensione.jsp" method="post">
+<form>
     <label for="titolo">Titolo:</label>
     <input type="text" id="titolo" name="titolo" required><br>
 
@@ -27,22 +27,5 @@
 
     <button type="submit">Salva</button>
 </form>
-
-<script>
-    const stars = document.querySelectorAll('.star');
-    const votoInput = document.getElementById('voto');
-
-    stars.forEach(star => {
-        star.addEventListener('click', function() {
-            const value = this.getAttribute('data-value');
-            votoInput.value = value;
-
-            stars.forEach(s => s.classList.remove('checked'));
-            for (let i = 0; i < value; i++) {
-                stars[i].classList.add('checked');
-            }
-        });
-    });
-</script>
 </body>
 </html>
