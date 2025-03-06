@@ -57,7 +57,7 @@ public class RegistrazioneResource {
                     .build();
         }
 
-        try(FileWriter fw = new FileWriter("credential.csv",true)) {
+        try(FileWriter fw = new FileWriter("data/credential.csv",true)) {
             fw.write(username + ";" + password);
             return Response.seeOther(URI.create("/login")).build();
         } catch (IOException e) {

@@ -5,6 +5,7 @@ public enum CredentialValidationErrors {
     EMPTY_PASSWORD,
     DUPLICATE_USERNAME,
     PASSSWORD_TOO_SHORT,
+    PASSSWORD_IS_WRONG,
     NOTEXIST_USERNAME
 }
 
