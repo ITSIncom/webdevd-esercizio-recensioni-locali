@@ -2,14 +2,14 @@ package it.itsincom.webdevd.model;
 
 public class Utente {
     private String id;
-    private String email;
+    private String username;
     private String password;
 
     public Utente() {}
 
-    public Utente(String id, String email, String password) {
+    public Utente(String id, String username, String password) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.password = password;
     }
 
@@ -19,7 +19,7 @@ public class Utente {
 
 
     public String getEmail() {
-        return email;
+        return username;
     }
 
     public String getPassword() {
@@ -30,8 +30,8 @@ public class Utente {
         this.id = id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
