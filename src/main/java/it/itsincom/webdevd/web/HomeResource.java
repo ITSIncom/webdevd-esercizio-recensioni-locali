@@ -6,6 +6,7 @@ import it.itsincom.webdevd.web.service.SessionManager;
 import jakarta.ws.rs.CookieParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
 
 @Path("/")
 public class HomeResource {
@@ -19,7 +20,8 @@ public class HomeResource {
     }
 
     @GET
-    public TemplateInstance mostraHome(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId) {
+    public TemplateInstance mostraHome(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId ,
+                                       @QueryParam("username") String username) {
         boolean isLoggedIn = true;
         if (sessionId == null || sessionId.isEmpty()) {
             isLoggedIn = false;
@@ -29,6 +31,6 @@ public class HomeResource {
                 isLoggedIn = false;
             }
         }
-        return index.data("loggedIn", isLoggedIn);
+        return index.data("loggedIn", isLoggedIn , "username", username);
     }
 }
