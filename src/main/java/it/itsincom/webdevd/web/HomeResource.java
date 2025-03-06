@@ -8,6 +8,8 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.QueryParam;
 
+import java.io.IOException;
+
 @Path("/")
 public class HomeResource {
 
@@ -21,7 +23,7 @@ public class HomeResource {
 
     @GET
     public TemplateInstance mostraHome(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId ,
-                                       @QueryParam("username") String username) {
+                                       @QueryParam("username") String username) throws IOException {
         boolean isLoggedIn = true;
         if (sessionId == null || sessionId.isEmpty()) {
             isLoggedIn = false;
