@@ -2,30 +2,30 @@ package it.itsincom.webdevd.model;
 
 public class Locale {
     private String id;
-    private String nome;
-    private String indirizzo;
-    private String foto;
+    private String name;
+    private String address;
+    private String photoPath;
 
-    public Locale(String id, String nome, String indirizzo, String foto) {
+    public Locale(String id, String name, String address, String photoPath) {
         this.id = id;
-        this.nome = nome;
-        this.indirizzo = indirizzo;
-        this.foto = foto;
+        this.name = name;
+        this.address = address;
+        this.photoPath = photoPath;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public String getIndirizzo() {
-        return indirizzo;
+    public String getAddress() {
+        return address;
     }
 
-    public String getFoto() {
-        return foto;
+    public String getPhotoPath() {
+        return photoPath;
     }
 }
