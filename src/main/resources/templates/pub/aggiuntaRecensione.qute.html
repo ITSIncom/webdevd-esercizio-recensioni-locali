@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aggiungi Recensione</title>
+</head>
+<body>
+    <h1>Aggiungi recensione per locale</h1>
+    <form action="/locale" method="post">
+        <label for="titoloRecensione">
+            Titolo:
+            <input type="text" name="titoloRecensione" id="titoloRecensione" placeholder="Inserisci il titolo" required>
+        </label>
+        <br>
+        <label for="votoRecensione">
+            Voto:
+            <input type="number" min="1" max="5" name="votoRecensione" id="votoRecensione" placeholder="Inserisci il voto" required>
+        </label>
+        <br>
+        <label for="testoRecensione">
+            <textarea name="testoRecensione" rows="40" cols="100" id="testoRecensione" placeholder="Inserisci il testo della recensione" required></textarea>
+        </label>
+        <br>
+        <button type="submit">Pubblica</button>
+    </form>
+</body>
+</html>
