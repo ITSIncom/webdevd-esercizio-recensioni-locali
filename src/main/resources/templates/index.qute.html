@@ -59,25 +59,30 @@
             gap: 1rem;
             font-size: 1rem;
 
-            & button {
-                width: 150px;
-                padding: 1rem;
-                border: none;
-                border-radius: 1rem;
-                background: darkseagreen;
-                transition: 0.3s all;
-                cursor: pointer;
+            & a {
+                text-decoration: none;
+                color: #ffffff;
 
-                & a {
-                    text-decoration: none;
+                & button {
+                    width: 150px;
+                    padding: 1rem;
+                    border: none;
+                    border-radius: 1rem;
+                    background: darkseagreen;
+                    transition: 0.3s all;
+                    cursor: pointer;
                     color: #ffffff;
-                }
 
-                &:hover {
-                    background: #4c7a4c;
+                    &:hover {
+                        background: #4c7a4c;
+                    }
                 }
             }
+
+
         }
+
+
 
         .search {
             width: 150px;
@@ -99,12 +104,12 @@
     <nav>
         <h1 class="title">Local Searcher</h1>
         <div class="buttons">
-            <button><a href="/login">Accedi</a></button>
+            <a href="/login"><button>Accedi</button></a>
 
             {#if loggedIn }
-                <button><a href="/profilo">Profilo</a></button>
+                <a href="/profilo"><button>Profilo</button></a>
             {#else}
-                <button><a href="/registrazione">Registrati</a></button>
+                <a href="/registrazione"><button>Registrati</button></a>
             {/if}
         </div>
     </nav>
