@@ -9,6 +9,9 @@
 <form method="post" action="/registrazione">
     <header>
         <h2>Registrazione</h2>
+        {#if message}
+            <h3 style="color: red">{message}</h3>
+        {/if}
     </header>
     <label for="username">Username: <input type="text" name="username" id="username" required="required"></label>
     <br>
