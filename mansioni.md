@@ -11,7 +11,6 @@
 
 ## Alessandro
 
-- HTML Aggiunta Locale #4
 - HTML Aggiunta recensione # 5
 - JAVA Creazione ProfiloResource #12
 
