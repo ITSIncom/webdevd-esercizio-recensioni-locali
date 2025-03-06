@@ -23,6 +23,30 @@ public class HomeResource {
 
     @GET
     public TemplateInstance mostraHome(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId) {
+        boolean isLoggedIn = isLoggedIn(sessionId);
+        return index.data("loggedIn", isLoggedIn,
+                            "locali", null);
+    }
+
+    @POST
+    @Path("/ricerca")
+    public TemplateInstance ricercaLocali(@CookieParam(SessionManager.NOME_COOKIE_SESSION) String sessionId,
+                                          @FormParam("search") String name){
+
+        boolean isLoggedIn = isLoggedIn(sessionId);
+
+        if(name.length() >= 3){
+            Map<String, String> locali = localiManager.search(name);
+
+            return index.data("loggedIn", isLoggedIn,
+                    "locali", locali);
+        }
+        return index.data("loggedIn", isLoggedIn,
+                "locali", null);
+    }
+
+
+    private boolean isLoggedIn(String sessionId) {
         boolean isLoggedIn = true;
         if (sessionId == null || sessionId.isEmpty()) {
             isLoggedIn = false;
@@ -32,18 +56,7 @@ public class HomeResource {
                 isLoggedIn = false;
             }
         }
-        return index.data("loggedIn", isLoggedIn);
+        return isLoggedIn;
     }
 
-    @POST
-    @Path("/ricerca")
-    public TemplateInstance ricercaLocali(@FormParam("search") String name){
-
-        if(name.length() >= 3){
-            Map<String, String> locali = localiManager.search(name);
-
-            return index.data("locali", locali);
-        }
-        return index.data("locali", "Devi inserire almeno 3 caratteri del nome del locale");
-    }
 }

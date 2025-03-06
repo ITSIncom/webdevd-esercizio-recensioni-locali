@@ -19,5 +19,13 @@
     <label for="search"><input id="search" placeholder="Cerca un locale..." name="search"></label>
     <button type="submit">Cerca</button>
 </form>
+
+{#if locali != null}
+    <ul>
+    {#for locale in locali}
+        <li><a href="/locale/{locale.key}">{locale.value}</a></li>
+    {/for}
+    </ul>
+{/if}
 </body>
 </html>

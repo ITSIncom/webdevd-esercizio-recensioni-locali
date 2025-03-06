@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,6 +74,19 @@ public class LocaliManager {
     }
 
     public Map<String, String> search(String name){
-        return null;
+        Map<String, String> locali = new HashMap<>();
+
+        try {
+            CSVParser csvParser = getCSVParser();
+            for (CSVRecord csvRecord : csvParser.getRecords()) {
+                if (csvRecord.get(1).contains(name)) {
+                    locali.put(csvRecord.get(0), csvRecord.get(1));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return locali;
     }
 }
