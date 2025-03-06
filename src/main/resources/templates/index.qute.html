@@ -105,7 +105,7 @@
             <a href="/login"><button>Accedi</button></a>
 
             {#if loggedIn }
-                <a href="/profile"><button>Profilo</button></a>
+                <a href="/profile?username={username}"><button>Profilo</button></a>
             {#else}
                 <a href="/register"><button>Registrati</button></a>
             {/if}

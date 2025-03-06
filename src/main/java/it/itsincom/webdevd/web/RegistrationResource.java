@@ -2,7 +2,7 @@ package it.itsincom.webdevd.web;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
-import it.itsincom.webdevd.service.UtentiManager;
+import it.itsincom.webdevd.service.UserManager;
 import it.itsincom.webdevd.web.validation.CredentialValidationErrors;
 import it.itsincom.webdevd.web.validation.CredentialValidator;
 import jakarta.ws.rs.FormParam;
@@ -17,10 +17,10 @@ import java.net.URI;
 public class RegistrationResource {
 
     private final Template register;
-    private final UtentiManager utentiManager;
+    private final UserManager utentiManager;
     private final CredentialValidator credentialValidator;
 
-    public RegistrationResource(Template register, UtentiManager utentiManager, CredentialValidator credentialValidator) {
+    public RegistrationResource(Template register, UserManager utentiManager, CredentialValidator credentialValidator) {
         this.register = register;
         this.utentiManager = utentiManager;
         this.credentialValidator = credentialValidator;

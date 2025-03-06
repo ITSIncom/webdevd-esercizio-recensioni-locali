@@ -3,7 +3,10 @@ package it.itsincom.webdevd.web;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Response;
 
 @Path("/profile")
 public class ProfileResource {
@@ -15,7 +18,12 @@ public class ProfileResource {
     }
 
     @GET
-    public TemplateInstance drawProfile() {
-        return profile.instance();
+    public TemplateInstance drawProfile(@QueryParam("username") String username) {
+        return profile.instance().data("username", username);
+    }
+
+    @POST
+    public Response processProfile(@QueryParam("username") String username) {
+        return Response.ok(profile.data(username).render()).build();
     }
 }

@@ -2,7 +2,7 @@ package it.itsincom.webdevd.web;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
-import it.itsincom.webdevd.service.UtentiManager;
+import it.itsincom.webdevd.service.UserManager;
 import it.itsincom.webdevd.web.service.SessionManager;
 import it.itsincom.webdevd.web.validation.CredentialValidator;
 import jakarta.ws.rs.FormParam;
@@ -19,11 +19,11 @@ import java.net.URI;
 public class LoginResource {
 
     private final Template login;
-    private final UtentiManager utentiManager;
+    private final UserManager utentiManager;
     private final CredentialValidator credentialValidator;
     private final SessionManager sessionManager;
 
-    public LoginResource(Template login, UtentiManager utentiManager, CredentialValidator credentialValidator, SessionManager sessionManager) {
+    public LoginResource(Template login, UserManager utentiManager, CredentialValidator credentialValidator, SessionManager sessionManager) {
         this.login = login;
         this.utentiManager = utentiManager;
         this.credentialValidator = credentialValidator;
@@ -41,16 +41,21 @@ public class LoginResource {
             @FormParam("password") String password
     ) throws IOException {
         String messaggioErrore = null;
+
         if (credentialValidator.validatePasswordLogin(password) != null) {
             messaggioErrore = "Username o password non validi";
+            System.out.println("errore " + messaggioErrore);
         } else if (credentialValidator.validateUsernameLogin(username) != null) {
             messaggioErrore = "Username o password non validi";
+            System.out.println("errore " + messaggioErrore);
         }
 
         if (messaggioErrore != null) {
+            System.out.println("errore " + messaggioErrore);
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(login.data("message", messaggioErrore))
                     .build();
+
         }
 
         if (!utentiManager.checkPassword(username, password)) {
@@ -60,9 +65,11 @@ public class LoginResource {
                     .build();
         }
 
+
+
         NewCookie sessionCookie = sessionManager.createUserSession(username);
         return Response
-                .seeOther(URI.create("/"))
+                .seeOther(URI.create("/?username=" + username))
                 .cookie(sessionCookie)
                 .build();
     }
