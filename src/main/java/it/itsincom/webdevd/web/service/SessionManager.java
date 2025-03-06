@@ -3,6 +3,8 @@ package it.itsincom.webdevd.web.service;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.core.NewCookie;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,10 +16,10 @@ public class SessionManager {
 
     private final Map<String, String> sessions = new ConcurrentHashMap<>();
 
-    public NewCookie createUserSession(String username) {
+    public NewCookie createUserSession(String username) throws IOException {
         String idSessione = UUID.randomUUID().toString();
         sessions.put(idSessione, username);
-        return new NewCookie.Builder(NOME_COOKIE_SESSION).value(idSessione).build();
+            return new NewCookie.Builder(NOME_COOKIE_SESSION).value(idSessione).build();
     }
 
     public String getUserFromSession(String sessionId) {
@@ -27,4 +29,5 @@ public class SessionManager {
     public void removeUserFromSession(String sessionId) {
         sessions.remove(sessionId);
     }
+
 }
