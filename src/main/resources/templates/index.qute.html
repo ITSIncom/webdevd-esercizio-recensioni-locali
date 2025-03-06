@@ -53,6 +53,17 @@
             }
         }
 
+        form button {
+            width: 150px;
+            padding: 1rem;
+            border: none;
+            border-radius: 1rem;
+            background: darkseagreen;
+            transition: 0.3s all;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
         .buttons {
             display: flex;
             flex-direction: row;
@@ -102,11 +113,16 @@
     <nav>
         <h1 class="title">Local Searcher</h1>
         <div class="buttons">
-            <a href="/login"><button>Accedi</button></a>
+
 
             {#if loggedIn }
-                <a href="/profile?username={username}"><button>Profilo</button></a>
+                <form action="/logout" method="post">
+                    <button type="submit">Logout</button>
+                </form>
+                    <a href="/profile"><button>Profilo</button></a>
+
             {#else}
+                <a href="/login"><button>Login</button></a>
                 <a href="/register"><button>Registrati</button></a>
             {/if}
         </div>
