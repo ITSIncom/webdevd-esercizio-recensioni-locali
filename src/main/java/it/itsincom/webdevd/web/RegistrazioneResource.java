@@ -2,7 +2,6 @@ package it.itsincom.webdevd.web;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
-import io.quarkus.security.credential.Credential;
 import it.itsincom.webdevd.service.UtentiManager;
 import it.itsincom.webdevd.web.validation.CredentialValidationErrors;
 import it.itsincom.webdevd.web.validation.CredentialValidator;
@@ -13,6 +12,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.IOException;
 import java.net.URI;
 
@@ -37,8 +37,7 @@ public class RegistrazioneResource {
     @POST
     public Response processaRegistrazione(
             @FormParam("username") String username,
-            @FormParam("password") String password) {
-        // 1. Validazione input
+            @FormParam("password") String password) throws IOException {
 
         String messaggioErrore = null;
         CredentialValidationErrors usernameError = credentialValidator.validateUsername(username);

@@ -18,4 +18,3 @@
 - HTML Risultati ricerca profilo #13
 - HTML Pagina Locale #14
 -  Migliorare utenti manager #23
-- - testestest
