@@ -2,7 +2,7 @@ package it.itsincom.webdevd.web;
 
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
-import io.quarkus.security.credential.Credential;
+import it.itsincom.webdevd.model.Utente;
 import it.itsincom.webdevd.service.UtentiManager;
 import it.itsincom.webdevd.web.validation.CredentialValidationErrors;
 import it.itsincom.webdevd.web.validation.CredentialValidator;
@@ -36,7 +36,6 @@ public class RegistrazioneResource {
     public Response processaRegistrazione(
             @FormParam("username") String username,
             @FormParam("password") String password) {
-        // 1. Validazione input
 
         String messaggioErrore = null;
         CredentialValidationErrors usernameError = credentialValidator.validateUsername(username);
@@ -56,15 +55,19 @@ public class RegistrazioneResource {
                     .build();
         }
 
-        boolean aggiunto = utentiManager.add(username, password);
-        if (!aggiunto) {
+        Utente utente = new Utente(String.valueOf(utentiManager.getUserNumber() + 1), username, password);
+
+        if (utentiManager.isUsernameUnivocal(utente))
+        {
+            utentiManager.saveUserToFile(utente);
+            return Response.seeOther(URI.create("/login")).build();
+        }
+        else
+        {
             messaggioErrore = "Utente già esistente";
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(registrazione.data("message", messaggioErrore))
                     .build();
-
         }
-        return Response.seeOther(URI.create("/login")).build();
-
     }
 }
