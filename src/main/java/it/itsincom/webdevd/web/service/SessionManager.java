@@ -10,12 +10,14 @@ import java.util.concurrent.ConcurrentHashMap;
 @ApplicationScoped
 public class SessionManager {
 
+    public static final String NOME_COOKIE_SESSION = "Sessione";
+
     private final Map<String, String> sessions = new ConcurrentHashMap<>();
 
     public NewCookie createUserSession(String username) {
         String idSessione = UUID.randomUUID().toString();
         sessions.put(idSessione, username);
-        return new NewCookie.Builder("Sessione").value(idSessione).build();
+        return new NewCookie.Builder(NOME_COOKIE_SESSION).value(idSessione).build();
     }
 
     public String getUserFromSession(String sessionId) {
