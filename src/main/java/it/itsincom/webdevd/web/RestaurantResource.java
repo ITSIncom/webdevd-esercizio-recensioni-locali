@@ -14,11 +14,11 @@ import java.net.URI;
 
 
 @Path("/restaurant")
-public class LocaleResource {
+public class RestaurantResource {
 
     private final Template restaurant;
 
-    public LocaleResource(Template restaurant) {
+    public RestaurantResource(Template restaurant) {
         this.restaurant = restaurant;
     }
 
