@@ -3,11 +3,13 @@ package it.itsincom.webdevd.web;
 import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import it.itsincom.webdevd.service.UtentiManager;
+import it.itsincom.webdevd.web.service.SessionManager;
 import it.itsincom.webdevd.web.validation.CredentialValidator;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.NewCookie;
 import jakarta.ws.rs.core.Response;
 
 import java.net.URI;
@@ -18,11 +20,13 @@ public class LoginResource {
     private final Template login;
     private final UtentiManager utentiManager;
     private final CredentialValidator credentialValidator;
+    private final SessionManager sessionManager;
 
-    public LoginResource(Template login, UtentiManager utentiManager, CredentialValidator credentialValidator) {
+    public LoginResource(Template login, UtentiManager utentiManager, CredentialValidator credentialValidator, SessionManager sessionManager) {
         this.login = login;
         this.utentiManager = utentiManager;
         this.credentialValidator = credentialValidator;
+        this.sessionManager = sessionManager;
     }
 
     @GET
@@ -55,6 +59,10 @@ public class LoginResource {
                     .build();
         }
 
-        return Response.seeOther(URI.create("/")).build();
+        NewCookie sessionCookie = sessionManager.createUserSession(username);
+        return Response
+                .seeOther(URI.create("/"))
+                .cookie(sessionCookie)
+                .build();
     }
 }
