@@ -41,9 +41,9 @@ public class LoginResource {
             @FormParam("password") String password
     ) throws IOException {
         String messaggioErrore = null;
-        if (credentialValidator.validatePasswordLogIn(password) != null) {
+        if (credentialValidator.validatePasswordLogin(password) != null) {
             messaggioErrore = "Username o password non validi";
-        } else if (credentialValidator.validateUsernameLogIn(username) != null) {
+        } else if (credentialValidator.validateUsernameLogin(username) != null) {
             messaggioErrore = "Username o password non validi";
         }
 

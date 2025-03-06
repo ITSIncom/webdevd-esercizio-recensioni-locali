@@ -3,8 +3,6 @@ package it.itsincom.webdevd.web.validation;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -30,7 +28,7 @@ public class CredentialValidator {
         return null;
     }
 
-    public CredentialValidationErrors validateUsernameLogIn(String username) throws IOException {
+    public CredentialValidationErrors validateUsernameLogin(String username) throws IOException {
         boolean ok = username != null && !username.isEmpty();
         if (!ok) {
             return CredentialValidationErrors.EMPTY_USERNAME;
@@ -50,7 +48,7 @@ public class CredentialValidator {
         return CredentialValidationErrors.NOTEXIST_USERNAME;
     }
 
-    public CredentialValidationErrors validatePasswordLogIn(String password) throws IOException {
+    public CredentialValidationErrors validatePasswordLogin(String password) throws IOException {
         boolean ok = password != null && !password.isEmpty();
         if (!ok) {
             return CredentialValidationErrors.EMPTY_PASSWORD;

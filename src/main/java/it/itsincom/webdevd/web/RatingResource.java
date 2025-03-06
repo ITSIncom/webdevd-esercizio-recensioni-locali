@@ -6,11 +6,11 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 
 @Path("/recensione")
-public class RecensioniResource {
+public class RatingResource {
 
     private final Template recensione;
 
-    public RecensioniResource(Template recensione) {
+    public RatingResource(Template recensione) {
         this.recensione = recensione;
     }
 

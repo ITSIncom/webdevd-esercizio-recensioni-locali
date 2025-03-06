@@ -4,14 +4,13 @@ import io.quarkus.qute.Template;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.core.Response;
 
 @Path("/profile")
-public class ProfiloResource {
+public class ProfileResource {
 
     private final Template profile;
 
-    public ProfiloResource(Template profile) {
+    public ProfileResource(Template profile) {
         this.profile = profile;
     }
 

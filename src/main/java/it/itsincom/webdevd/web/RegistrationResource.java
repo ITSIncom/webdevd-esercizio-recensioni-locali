@@ -13,17 +13,16 @@ import jakarta.ws.rs.core.Response;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.IOException;
 import java.net.URI;
 
 @Path("/registrazione")
-public class RegistrazioneResource {
+public class RegistrationResource {
 
     private final Template registrazione;
     private final UtentiManager utentiManager;
     private final CredentialValidator credentialValidator;
 
-    public RegistrazioneResource(Template registrazione, UtentiManager utentiManager, CredentialValidator credentialValidator) {
+    public RegistrationResource(Template registrazione, UtentiManager utentiManager, CredentialValidator credentialValidator) {
         this.registrazione = registrazione;
         this.utentiManager = utentiManager;
         this.credentialValidator = credentialValidator;
