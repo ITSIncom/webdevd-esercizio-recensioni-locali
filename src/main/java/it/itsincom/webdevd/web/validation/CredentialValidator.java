@@ -16,22 +16,41 @@ public class CredentialValidator {
         if (!ok) {
             return CredentialValidationErrors.EMPTY_USERNAME;
         }
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("data/credential.csv"))) {
-            String line;
-            // Salta la prima riga (header)
-            reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String fileUsername = line.split(";")[0]; // Prendi il nome utente
-                if (fileUsername.equals(username)) {
-                    return null; // Username trovato, nessun errore
-                }
-            }
-        }
-        return CredentialValidationErrors.NOTEXIST_USERNAME; // Username non trovato
+        return null;
     }
 
     public CredentialValidationErrors validatePassword(String password) throws IOException {
+        boolean ok = password != null && !password.isEmpty();
+        if (!ok) {
+            return CredentialValidationErrors.EMPTY_PASSWORD;
+        }
+        if (password.length() < 8) {
+            return CredentialValidationErrors.PASSSWORD_TOO_SHORT;
+        }
+        return null;
+    }
+
+    public CredentialValidationErrors validateUsernameLogIn(String username) throws IOException {
+        boolean ok = username != null && !username.isEmpty();
+        if (!ok) {
+            return CredentialValidationErrors.EMPTY_USERNAME;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/credential.csv"))) {
+            String line;
+
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String fileUsername = line.split(";")[0];
+                if (fileUsername.equals(username)) {
+                    return null;
+                }
+            }
+        }
+        return CredentialValidationErrors.NOTEXIST_USERNAME;
+    }
+
+    public CredentialValidationErrors validatePasswordLogIn(String password) throws IOException {
         boolean ok = password != null && !password.isEmpty();
         if (!ok) {
             return CredentialValidationErrors.EMPTY_PASSWORD;
