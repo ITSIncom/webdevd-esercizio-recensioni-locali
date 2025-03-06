@@ -5,17 +5,17 @@ import io.quarkus.qute.TemplateInstance;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 
-@Path("/recensione")
+@Path("/rating")
 public class RatingResource {
 
-    private final Template recensione;
+    private final Template rating;
 
-    public RatingResource(Template recensione) {
-        this.recensione = recensione;
+    public RatingResource(Template rating) {
+        this.rating = rating;
     }
 
     @GET
     public TemplateInstance drawRecensione() {
-        return recensione.instance();
+        return rating.instance();
     }
 }

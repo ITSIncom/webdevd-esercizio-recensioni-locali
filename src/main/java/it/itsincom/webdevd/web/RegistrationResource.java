@@ -11,32 +11,30 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.net.URI;
 
-@Path("/registrazione")
+@Path("/register")
 public class RegistrationResource {
 
-    private final Template registrazione;
+    private final Template register;
     private final UtentiManager utentiManager;
     private final CredentialValidator credentialValidator;
 
-    public RegistrationResource(Template registrazione, UtentiManager utentiManager, CredentialValidator credentialValidator) {
-        this.registrazione = registrazione;
+    public RegistrationResource(Template register, UtentiManager utentiManager, CredentialValidator credentialValidator) {
+        this.register = register;
         this.utentiManager = utentiManager;
         this.credentialValidator = credentialValidator;
     }
 
     @GET
     public TemplateInstance mostraPaginaRegistrazione() {
-        return registrazione.data("message", null);
+        return register.data("message", null);
     }
 
     @POST
     public Response processaRegistrazione(
             @FormParam("username") String username,
-            @FormParam("password") String password) throws IOException {
+            @FormParam("password") String password) {
 
         String messaggioErrore = null;
         CredentialValidationErrors usernameError = credentialValidator.validateUsername(username);
@@ -52,16 +50,13 @@ public class RegistrationResource {
 
         if (messaggioErrore != null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(registrazione.data("message", messaggioErrore))
+                    .entity(register.data("message", messaggioErrore))
                     .build();
         }
 
-        try(FileWriter fw = new FileWriter("data/credential.csv",true)) {
-            fw.write(username + ";" + password + "\n");
-            return Response.seeOther(URI.create("/login")).build();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        utentiManager.add(username, password);
+
+        return Response.seeOther(URI.create("/login")).build();
 
     }
 }

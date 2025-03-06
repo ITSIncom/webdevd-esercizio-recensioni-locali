@@ -9,7 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CredentialValidator {
 
-    public CredentialValidationErrors validateUsername(String username) throws IOException {
+    public CredentialValidationErrors validateUsername(String username) {
         boolean ok = username != null && !username.isEmpty();
         if (!ok) {
             return CredentialValidationErrors.EMPTY_USERNAME;
@@ -17,7 +17,7 @@ public class CredentialValidator {
         return null;
     }
 
-    public CredentialValidationErrors validatePassword(String password) throws IOException {
+    public CredentialValidationErrors validatePassword(String password) {
         boolean ok = password != null && !password.isEmpty();
         if (!ok) {
             return CredentialValidationErrors.EMPTY_PASSWORD;

@@ -13,24 +13,24 @@ import java.io.IOException;
 import java.net.URI;
 
 
-@Path("/locale")
+@Path("/restaurant")
 public class LocaleResource {
 
-    private final Template locale;
+    private final Template restaurant;
 
-    public LocaleResource(Template locale) {
-        this.locale = locale;
+    public LocaleResource(Template restaurant) {
+        this.restaurant = restaurant;
     }
 
     @GET
     public TemplateInstance drawLocale() {
-        return locale.instance();
+        return restaurant.instance();
     }
 
     @POST
     public Response processLocale(@FormParam("nome") String nomeLocale
                                 ,@FormParam("indirizzo") String indirizzoLocale)  {
-        try(FileWriter fw = new FileWriter("locale.csv",true)) {
+        try(FileWriter fw = new FileWriter("restaurant.csv",true)) {
             fw.write(nomeLocale + "," + indirizzoLocale);
             return Response.seeOther(URI.create("/")).build();
         }
