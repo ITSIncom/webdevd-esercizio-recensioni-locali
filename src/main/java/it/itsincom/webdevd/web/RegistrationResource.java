@@ -11,6 +11,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.core.Response;
 
+import java.io.IOException;
 import java.net.URI;
 
 @Path("/register")
@@ -34,10 +35,16 @@ public class RegistrationResource {
     @POST
     public Response processaRegistrazione(
             @FormParam("username") String username,
-            @FormParam("password") String password) {
+            @FormParam("password") String password) throws IOException {
+
 
         String messaggioErrore = null;
         CredentialValidationErrors usernameError = credentialValidator.validateUsername(username);
+        CredentialValidationErrors usernameExist = credentialValidator.validateUsernameRegister(username);
+
+        if (usernameExist != null) {
+            messaggioErrore = "Username non valida, motivo: " + usernameExist.name();
+        }
 
         if (usernameError != null) {
             messaggioErrore = "Username non valido, motivo: " + usernameError.name();

@@ -70,4 +70,20 @@ public class CredentialValidator {
         }
         return CredentialValidationErrors.PASSSWORD_IS_WRONG;
     }
+
+
+    public CredentialValidationErrors validateUsernameRegister(String username) throws IOException {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("data/credential.csv"))) {
+            String line;
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                String fileUsername = line.split(";")[0];
+                if (fileUsername.equals(username)) {
+                    return CredentialValidationErrors.DUPLICATE_USERNAME;
+                }
+            }
+        }
+        return null ;
+    }
 }
