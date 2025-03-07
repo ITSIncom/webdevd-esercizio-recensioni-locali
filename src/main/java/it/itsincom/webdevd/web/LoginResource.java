@@ -69,7 +69,7 @@ public class LoginResource {
 
         NewCookie sessionCookie = sessionManager.createUserSession(username);
         return Response
-                .seeOther(URI.create("/?username=" + username))
+                .seeOther(URI.create("/"))
                 .cookie(sessionCookie)
                 .build();
     }
