@@ -10,8 +10,21 @@
 <body>
     <h1>NomeSito</h1>
     <h2>Ecco i risultati per {ricerca}</h2>
-    <div>
-
-    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Indirizzo</th>
+        </tr>
+        </thead>
+        <tbody>
+        {#for locale in locali}
+            <tr>
+                <td>{locale.nome}</td>
+                <td>{locale.indirizzo}</td>
+            </tr>
+        {/for}
+        </tbody>
+    </table>
 </body>
 </html>
