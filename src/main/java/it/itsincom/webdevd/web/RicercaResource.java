@@ -63,7 +63,6 @@ public class RicercaResource {
         else
         {
             return ricerca.data("result", "Ecco i locali trovati con: " + search).data("locali",filteredLocali);
-
         }
     }
 }
