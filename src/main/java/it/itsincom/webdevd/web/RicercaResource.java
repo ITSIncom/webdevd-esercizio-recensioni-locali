@@ -56,6 +56,14 @@ public class RicercaResource {
             }
         });
 
-        return ricerca.data("ricerca", search).data("locali",filteredLocali);
+        if(filteredLocali.isEmpty())
+        {
+            return ricerca.data("result", "Nessun locale trovato con: " + search).data("locali",null);
+        }
+        else
+        {
+            return ricerca.data("result", "Ecco i locali trovati con: " + search).data("locali",filteredLocali);
+
+        }
     }
 }
