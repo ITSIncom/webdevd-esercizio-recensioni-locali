@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
+    <style>
+        button{
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 <h1>Home Page</h1>
@@ -16,8 +22,23 @@
     {/if}
 </ul>
 <form action="/ricerca" method="post">
-    <label for="search"><input id="search" placeholder="Cerca un locale..." name="search"></label>
-    <button type="submit">Cerca</button>
+    <label for="search"><input id="search-input" placeholder="Cerca un locale..." name="search" value=""></label>
+    <button type="submit" id="search-btn">Cerca</button>
 </form>
+<script>
+    const search_btn = document.getElementById("search-btn");
+    const search_input = document.getElementById("search-input");
+
+    search_input.addEventListener("mouseleave",() => {
+        search_btn.style.opacity = "1";
+        search_btn.style.pointerEvents = "all";
+        if(search_input.value.length < 3)
+        {
+            search_btn.style.opacity = "0.5";
+            search_btn.style.pointerEvents = "none";
+        }
+
+    })
+</script>
 </body>
 </html>
