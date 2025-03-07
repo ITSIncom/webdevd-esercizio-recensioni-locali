@@ -1,6 +1,7 @@
 package it.itsincom.webdevd.web.service;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.NewCookie;
 
 import java.util.Map;
@@ -24,7 +25,18 @@ public class SessionManager {
         return sessions.get(sessionId);
     }
 
+    public String getUsernameFromSession(HttpHeaders headers) {
+        if (headers.getCookies().containsKey(NOME_COOKIE_SESSION)) {
+            String sessionId = headers.getCookies().get(NOME_COOKIE_SESSION).getValue();
+            return getUserFromSession(sessionId);
+        }
+        return null;
+    }
+
+
     public void removeUserFromSession(String sessionId) {
+        System.out.println("Removing session: " + sessionId);
         sessions.remove(sessionId);
+        System.out.println("Current sessions: " + sessions); //debug
     }
 }
